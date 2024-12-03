@@ -9,22 +9,21 @@ defineProps({
 
 <template>
   <div class="container">
-    <div v-for="(item, index) in list" :key="index">
-      <TaskItem :task="item">
-        <template #title="slotProps">
-          <button @click.prevent="() => console.log('bonjour')">
-            {{ slotProps.title }}
-          </button>
-        </template>
-      </TaskItem>
-    </div>
+    <TaskItem v-for="(item, index) in list" :key="index" :task="item">
+      <template #title="slotProps">
+        <h3>
+          {{ slotProps.title }}
+        </h3>
+      </template>
+    </TaskItem>
   </div>
 </template>
 
 <style scoped>
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;
 }
 </style>

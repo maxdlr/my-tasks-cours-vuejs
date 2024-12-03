@@ -15,6 +15,7 @@ const handleAdd = () => {
 
   const newTask = {
     title: title.value,
+
     content: content.value,
     important: important.value,
   };

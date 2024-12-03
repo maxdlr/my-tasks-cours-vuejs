@@ -3,24 +3,25 @@ import { defineProps } from "vue";
 
 defineProps({
   task: {
-    type: { title: String, content: String, important: Boolean },
+    type: {
+      id: Number,
+      userId: Number,
+      title: String,
+      body: String,
+    },
     required: true,
   },
 });
 </script>
 
 <template>
-  <div
-    :class="{
-      important: task.important,
-    }"
-    class="item"
-  >
+  <div class="item">
+    <h2>{{ task.id }}</h2>
     <slot name="title" :title="task.title">
       <span>{{ task.title }}</span>
     </slot>
-    <slot name="content" :content="task.content">
-      <p>{{ task.content }}</p>
+    <slot name="body" :body="task.body">
+      <p>{{ task.body }}</p>
     </slot>
   </div>
 </template>
@@ -34,10 +35,7 @@ defineProps({
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
-}
-
-.important {
-  border: 5px solid red;
+  max-width: 25%;
 }
 
 .item p {

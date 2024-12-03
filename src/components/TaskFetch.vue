@@ -1,22 +1,14 @@
 <script setup>
-import TaskForm from "@/components/TaskForm.vue";
-import TaskList from "@/components/TaskList.vue";
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
-const list = ref([]);
-
-const add = (task) => {
-  list.value.push(task);
-  console.log(list.value);
-};
-
+const data = ref([]);
 const isLoading = ref(false);
 
 const getData = async () => {
   isLoading.value = true;
   setTimeout(async () => {
     const fetched = await fetch("https://jsonplaceholder.typicode.com/posts");
-    list.value = await fetched.json();
+    data.value = await fetched.json();
     isLoading.value = false;
   }, 2000);
 };
@@ -27,8 +19,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <TaskForm @add="add" />
-  <TaskList :list="list" />
+  <div v-if="isLoading">LOADING</div>
+  <div v-else>
+    <div v-for="post in data" :key="post.id">
+      <span>{{ post.id }}</span>
+      <span> - {{ post.title }}</span>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
