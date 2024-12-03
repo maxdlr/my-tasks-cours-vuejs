@@ -28,7 +28,22 @@ onMounted(async () => {
 
 <template>
   <TaskForm @add="add" />
-  <TaskList :list="list" />
+  <button @click.prevent="getData">REFRESH</button>
+  <div>
+    <div
+      v-if="isLoading"
+      style="
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <span>LOADING</span>
+    </div>
+    <TaskList v-else :list="list" />
+  </div>
 </template>
 
 <style scoped></style>
