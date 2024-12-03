@@ -1,75 +1,46 @@
 <script setup>
-import TaskModule from "@/components/TaskModule.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
+import TaskList from "@/components/TaskList.vue";
+import TaskForm from "@/components/TaskForm.vue";
+import { defineProps } from "vue";
 
-const taskModuleNames = ref([]);
-const currentTaskModule = ref("");
-
-const taskModuleButtons = computed(() => {
-  const buttons = [
-    {
-      label: "all",
-      action: () => {
-        currentTaskModule.value = "";
-      },
-    },
-  ];
-  taskModuleNames.value.forEach((item) => {
-    buttons.push({
-      label: item,
-      action: () => {
-        currentTaskModule.value = item;
-      },
-    });
-  });
-  return buttons;
+defineProps({
+  title: { type: String },
 });
 
-const newTaskModule = ref("");
+const list = ref([
+  {
+    title: "example",
+    content: "content",
+    important: false,
+  },
+  {
+    title: "example",
+    content: "content",
+    important: true,
+  },
+  {
+    title: "example",
+    content: "content",
+    important: false,
+  },
+  {
+    title: "example",
+    content: "content",
+    important: false,
+  },
+]);
 
-const addTaskModule = () => {
-  taskModuleNames.value.push(newTaskModule.value);
-  newTaskModule.value = "";
+const add = (task) => {
+  list.value.push(task);
+  console.log(list.value);
 };
 </script>
 
 <template>
-  <input type="text" v-model="newTaskModule" />
-  <button @click.prevent="addTaskModule">Ajouter une liste</button>
-  <section class="columns">
-    <div class="left-container">
-      <button
-        v-for="(button, index) in taskModuleButtons"
-        @click.prevent="button.action"
-        :key="index"
-      >
-        {{ button.label }}
-      </button>
-    </div>
-    <div>
-      <div v-if="currentTaskModule === ''">
-        <TaskModule
-          v-for="(title, index) in taskModuleNames"
-          :key="index"
-          :title="title"
-        />
-      </div>
-      <div v-else>
-        <TaskModule :title="currentTaskModule" />
-      </div>
-    </div>
-  </section>
+  <h1 v-if="title">{{ title }}</h1>
+  <TaskForm @add="add" />
+  <TaskList :list="list" />
 </template>
 
-<style scoped>
-.columns {
-  display: flex;
-  height: 100%;
-}
-
-.left-container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 10px;
-}
-</style>
+<style scoped></style>

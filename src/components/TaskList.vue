@@ -10,7 +10,13 @@ defineProps({
 <template>
   <div class="container">
     <div v-for="(item, index) in list" :key="index">
-      <TaskItem :task="item" />
+      <TaskItem :task="item">
+        <template #title="slotProps">
+          <button @click.prevent="() => console.log('bonjour')">
+            {{ slotProps.title }}
+          </button>
+        </template>
+      </TaskItem>
     </div>
   </div>
 </template>

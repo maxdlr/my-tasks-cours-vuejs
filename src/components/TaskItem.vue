@@ -16,8 +16,12 @@ defineProps({
     }"
     class="item"
   >
-    <span>{{ task.title }}</span>
-    <p>{{ task.content }}</p>
+    <slot name="title" :title="task.title">
+      <span>{{ task.title }}</span>
+    </slot>
+    <slot name="content" :content="task.content">
+      <p>{{ task.content }}</p>
+    </slot>
   </div>
 </template>
 
