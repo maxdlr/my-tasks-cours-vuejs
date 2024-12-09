@@ -1,5 +1,5 @@
 <script setup>
-import TaskItem from "@/components/TaskItem.vue";
+import TaskItem from "@/components/Task/TaskItem.vue";
 import { defineProps } from "vue";
 
 defineProps({

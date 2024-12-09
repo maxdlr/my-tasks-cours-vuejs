@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import TaskList from "@/components/TaskList.vue";
-import TaskForm from "@/components/TaskForm.vue";
+import TaskList from "@/components/Task/TaskList.vue";
+import TaskForm from "@/components/Task/TaskForm.vue";
 import { defineProps } from "vue";
 
 defineProps({
